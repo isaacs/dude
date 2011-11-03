@@ -2,7 +2,7 @@
 ### A Lebowski Ipsum generator for the command line
 
 Uses the wonderful [Lebowski Ipsum](http://lebowskiipsum.com/) and [Node.js](http://nodejs.org).
-Install with `npm install dude`.
+Install with `npm install dude -g`.
 
 	Usage: dude [options]
 

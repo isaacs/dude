@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
 var fs      = require('fs'),
-    util    = require('util'),
-    jsdom   = require('jsdom'),
-    program = require('commander');
+    program = require('commander'),
+    request = require('request');
 
 program
 	.version( JSON.parse(fs.readFileSync(__dirname + '/../package.json', 'utf8')).version )
@@ -21,17 +20,26 @@ var url = 'http://lebowskiipsum.com/dude/generate' +
           '/html/' + (program.html || 'false') +
           '/characters/1';
 
-jsdom.env({
-	html: url,
-	done: function(errors, window) {
-		var content;
-		if (!errors && window && (result = window.document.getElementById('lebowskiIpsum'))) {
-			content = result.value;
-		}
-		if (!content) {
-			util.debug('Well, uh ... looks like you got the wrong guy.');
-			return;
-		}
-		console.log(content);
-	}
+var req = { url: url }
+var body = ""
+
+
+request(req).on("data", function (c) {
+  body += c
+}).on("end", function () {
+  // pluck off everything before the <textarea
+  body = body.split('<textarea');
+  body.shift();
+
+  // pluck off the contents of the <textarea ...>
+  body[0] = body[0].split('>');
+  body[0].shift();
+  body[0] = body[0].join('>');
+
+  // pluck off everything after the </textarea
+  body = body.join('<textarea').split('</textarea');
+  body = body.shift();
+
+  // print!
+  console.log(body);
 });
