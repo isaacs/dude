@@ -1,0 +1,20 @@
+{
+  "name": "dude",
+  "description": "Lebowski Ipsum generator for the command line",
+  "version": "0.0.1",
+  "author" : {
+    "name"  : "Frederic Hemberger",
+    "email" : "mail@frederic-hemberger.de",
+    "url"   : "http://frederic-hemberger.de"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fhemberger/dude.git"
+  },
+  "dependencies": {
+    "jsdom": ">= 0.2.9",
+    "commander": ">= 0.3.2"
+  },
+  "engines": { "node": ">= 0.4.2" },
+  "bin" : { "dude" : "./bin/dude" }
+}
